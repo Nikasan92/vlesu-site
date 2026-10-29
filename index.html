@@ -109,7 +109,9 @@
 
         .brand-link:hover img { transform: scale(1.02); }
 
+        .nav-desktop { display: flex; align-items: center; }
         .nav-list { display: flex; gap: 8px; list-style: none; align-items: center; }
+        .header-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 
         .nav-list a { 
             text-decoration: none; 
@@ -404,8 +406,7 @@
         .founder-section { background: #fff; padding: 120px 32px; border-bottom: 1px solid var(--border-subtle); }
         .founder-wrap { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 460px 1fr; gap: 64px; align-items: center; }
         .founder-photo { position: relative; }
-        .founder-photo::after { content: ''; position: absolute; inset: -14px 14px 14px -14px; border: 1px solid var(--border-strong); border-radius: 18px; pointer-events: none; }
-        .founder-photo img { width: 100%; height: 560px; object-fit: cover; border-radius: 14px; display: block; position: relative; z-index: 2; box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+        .founder-photo img { width: 100%; height: 560px; object-fit: cover; border-radius: 18px; display: block; box-shadow: 0 18px 45px rgba(18, 29, 20, 0.12); }
         .sub-tag { font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--earth-accent); font-weight: 700; margin-bottom: 10px; display: block; }
         .founder-wrap h2 { font-family: var(--font-serif); font-size: clamp(2.3rem, 3.4vw, 3.2rem); color: var(--forest-dark); margin-bottom: 12px; font-weight: 500; }
         .founder-role { font-size: 1.08rem; color: var(--forest-leaf); margin-bottom: 24px; font-weight: 500; }
@@ -746,16 +747,25 @@
             .philosophy-path-card { padding: 46px 36px; }
         }
         @media (max-width: 768px) {
-            .nav-list { display: none; }
-            .burger-btn, .mobile-drawer, .mobile-floating-cta { display: flex; }
+            .nav-desktop { display: none; }
+            .header-actions { display: flex; align-items: center; gap: 8px; }
+            .header-actions .nav-btn {
+                display: inline-flex !important;
+                padding: 7px 15px !important;
+                font-size: 0.82rem !important;
+                font-weight: 600 !important;
+                border-radius: 30px !important;
+            }
+            .burger-btn { display: flex; width: 38px; height: 38px; padding: 6px; }
+            .mobile-drawer { display: flex; }
+            .brand-link img { height: 56px; max-width: 170px; }
+            header.scrolled .brand-link img { height: 46px; }
+            header { padding: 6px 0; }
+            .header-inner { padding: 0 16px; gap: 8px; }
             .philosophy-path-section { min-height: auto; padding: 50px 16px; margin-top: 50px; }
             .philosophy-path-card { padding: 32px 18px; border-radius: 20px; }
             .path-manifesto { font-size: 1.75rem; }
             .path-narrative { font-size: 0.94rem; }
-            .brand-link img { height: 66px; max-width: 220px; }
-            header.scrolled .brand-link img { height: 50px; }
-            header { padding: 6px 0; }
-            .header-inner { padding: 0 16px; }
             .hero { padding: 80px 18px 70px; }
             .hero h1 { font-size: 1.95rem; }
             .quote-zone { padding: 60px 18px; }
@@ -771,7 +781,6 @@
             .ambient-audio-toggle { bottom: calc(16px + env(safe-area-inset-bottom, 0px)); left: 16px; font-size: 0.78rem; padding: 9px 13px; }
             .concierge-card, .privacy-card { padding: 32px 20px; border-radius: 20px; }
             .concierge-card h3, .privacy-card h3 { font-size: 1.75rem; }
-            body { padding-bottom: 70px; }
         }
     
         /* ---------------- МОБИЛЬНАЯ НАВИГАЦИЯ И БУРГЕР ---------------- */
@@ -845,32 +854,6 @@
         }
 
         .mobile-menu-links a:hover { color: var(--forest-leaf); }
-
-        /* Плавающая мобильная кнопка записи */
-        .mobile-floating-cta {
-            display: none;
-            position: fixed;
-            bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-            right: 16px;
-            z-index: 950;
-            background: linear-gradient(135deg, #243827 0%, #1a2c1d 100%);
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.22);
-            padding: 12px 22px;
-            border-radius: 40px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            box-shadow: 0 10px 25px rgba(18, 29, 20, 0.35);
-            letter-spacing: 0.02em;
-            cursor: pointer;
-            align-items: center;
-            gap: 6px;
-            transition: transform 0.2s ease;
-        }
-
-        .mobile-floating-cta:active {
-            transform: scale(0.96);
-        }
 
         /* ---------------- СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ (152-ФЗ) ---------------- */
         .consent-block {
@@ -1069,20 +1052,25 @@
             <a href="#" class="brand-link">
                 <img src="Logo.png" alt="Пространство заботы Лес">
             </a>
-            <ul class="nav-list">
-                <li><a href="#about">О пространстве</a></li>
-                <li><a href="#experts">Лесные эксперты</a></li>
-                <li><a href="#rent">Аренда залов</a></li>
-                <li><a href="#contacts">Контакты</a></li>
-                <li><button class="nav-btn" onclick="openConcierge()">Записаться</button></li>
-            </ul>
 
-            <!-- Кнопка мобильного меню (бургер) -->
-            <button class="burger-btn" id="burgerToggle" aria-label="Открыть навигационное меню">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <nav class="nav-desktop">
+                <ul class="nav-list">
+                    <li><a href="#about">О пространстве</a></li>
+                    <li><a href="#experts">Лесные эксперты</a></li>
+                    <li><a href="#rent">Аренда залов</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button class="nav-btn" onclick="openConcierge()">Записаться</button>
+                <!-- Кнопка мобильного меню (бургер) -->
+                <button class="burger-btn" id="burgerToggle" aria-label="Открыть навигационное меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -1487,10 +1475,7 @@
         </div>
     </div>
 
-    <!-- ПЛАВАЮЩАЯ МОБИЛЬНАЯ КНОПКА ЗАПИСИ -->
-    <button class="mobile-floating-cta" onclick="openConcierge()" aria-label="Быстрая запись на прием">
-        🌿 Записаться
-    </button>
+
 
     <!-- ЗВУКОВОЙ ПЕРЕКЛЮЧАТЕЛЬ ЛЕСНОГО ЭМБИЕНТА -->
     <div class="ambient-audio-toggle" id="ambientToggle" onclick="toggleForestSound()" title="Включить звуки леса">
